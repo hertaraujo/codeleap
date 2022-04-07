@@ -1,4 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
+
+// Slices
 import postReducer from "./post-slice";
 import uiReducer from "./ui-slice";
 import authReducer from "./auth-slice";

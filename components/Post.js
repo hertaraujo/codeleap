@@ -8,8 +8,11 @@ import CompHeader from "./CompHeader";
 import Button from "./utils/Button";
 import ConfirmBox from "./ConfirmBox";
 import PostForm from "./PostForm";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+
+// Hooks
+import { useSelector, useDispatch } from "react-redux";
+
+// Actions
 import { uiActions } from "../redux/ui-slice";
 
 // Icons
@@ -18,7 +21,6 @@ import editIcon from "../assets/edit.svg";
 
 // Styles
 import styled from "styled-components";
-import { useEffect } from "react";
 
 const PostMain = styled.main`
   display: grid;
@@ -51,10 +53,6 @@ function Post({ post }) {
   const isEditOpen = useSelector(state => state.ui.isEditOpen);
   const isExcludeOpen = useSelector(state => state.ui.isExcludeOpen);
 
-  const editPostHandler = () => {
-    // dispatch(uiActions.toggleExcludeModal());
-  };
-
   return (
     <Card fillCard>
       <CompHeader isPost text={post.title}>
@@ -66,7 +64,6 @@ function Post({ post }) {
               onRequestClose={() => dispatch(uiActions.toggleExcludeModal())}
               isOpen={isExcludeOpen}
             >
-              {/* <ConfirmBox onToggleModal={editPostHandler} /> */}
               <ConfirmBox />
             </Modal>
             <Button
@@ -87,10 +84,7 @@ function Post({ post }) {
               isOpen={isEditOpen}
             >
               <Card stretchCard>
-                <PostForm
-                  isEdit
-                  onToggleModal={() => dispatch(uiActions.toggleEditModal())}
-                />
+                <PostForm isEdit />
               </Card>
             </Modal>
             <span style={{ transform: `translateY(3.5px)` }}>

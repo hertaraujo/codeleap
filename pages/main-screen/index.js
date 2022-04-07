@@ -2,16 +2,17 @@ import Head from "next/head";
 import Card from "../../components/UI/Card";
 import CompHeader from "../../components/CompHeader";
 import Posts from "../../components/Posts";
+import PostForm from "../../components/PostForm";
 
 // Styles
 import styled from "styled-components";
-import PostForm from "../../components/PostForm";
 
 // hooks
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
+// Actions
 import { postActions } from "../../redux/post-slice";
-import { useEffect } from "react";
 import { login } from "../../actions/auth-actions";
 
 const CompMain = styled.main`
@@ -26,7 +27,6 @@ function MainScreen(props) {
   dispatch(
     postActions.updatePosts({
       posts: props.posts,
-      postsFetchedAt: props.postsFetchedAt,
     })
   );
 

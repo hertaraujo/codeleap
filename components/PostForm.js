@@ -4,20 +4,18 @@ import Button from "./utils/Button";
 
 // Hooks
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { sendPost } from "../actions/post-actions";
 
-function PostForm(props) {
-  // TODO  Esses estados aqui serão recebidos por Slice e por isso já estarão com texto editável em corpo ao ser renderizado no caso de props.isEdit === true
-
+function PostForm({ isEdit }) {
   const dispatch = useDispatch();
 
-  // TODO  Criar um hook para esse input validation
+  // TODO  Esses estados aqui serão recebidos por Slice e por isso já estarão com texto editável em corpo ao ser renderizado no caso de isEdit === true
   const [titleValue, setTitleValue] = useState(``);
   const [contentValue, setContentValue] = useState(``);
 
+  // TODO  Criar um hook para esse input validation
   const username = useSelector(state => state.auth.loggedUser);
 
   const [isTouched, setIsTouched] = useState(false);
@@ -31,12 +29,23 @@ function PostForm(props) {
 
     if (!valueIsValid) return;
 
-    dispatch(sendPost({ title: titleValue, content: contentValue, username }));
+    if (isEdit) {
+      // TEMP
+      return;
+      // TODO  Action and Reducer
+      dispatch(
+        changePost({ title: titleValue, content: contentValue, username })
+      );
+    } else {
+      dispatch(
+        sendPost({ title: titleValue, content: contentValue, username })
+      );
+    }
   };
 
   return (
     <Form
-      heading={props.isEdit ? "Edit item" : "What’s on your mind?"}
+      heading={isEdit ? "Edit item" : "What’s on your mind?"}
       onSubmit={submitHandler}
     >
       <Input
@@ -77,7 +86,7 @@ function PostForm(props) {
             : ""
         }
       >
-        {props.isEdit ? "SAVE" : "CREATE"}
+        {isEdit ? "SAVE" : "CREATE"}
       </Button>
     </Form>
   );

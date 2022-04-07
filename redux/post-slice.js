@@ -26,7 +26,6 @@ const postSlice = createSlice({
       }));
 
       state.posts = formattedPosts;
-      state.postsFetchedAt = action.payload.postsFetchedAt;
     },
 
     addPost(state, action) {
@@ -43,6 +42,8 @@ const postSlice = createSlice({
         ...state.posts,
       ];
     },
+
+    changePost(state, action) {},
   },
 });
 
