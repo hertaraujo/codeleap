@@ -1,6 +1,8 @@
-import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { uiActions } from "../redux/ui-slice";
 
 import Button from "./utils/Button";
+import styled from "styled-components";
 
 const CBComp = styled.div`
   display: grid;
@@ -21,20 +23,21 @@ const CBComp = styled.div`
   }
 `;
 
-function ConfirmBox(props) {
-  const cancelHandler = e => {
-    props.onToggleModal();
-  };
+function ConfirmBox() {
+  const dispatch = useDispatch();
 
-  const confirmHandler = e => {
-    props.onToggleModal();
+  const confirmHandler = () => {
+    dispatch(uiActions.toggleExcludeModal());
   };
 
   return (
     <CBComp>
       <p>Are you sure you want to delete this post?</p>
       <div>
-        <Button isModal onClick={cancelHandler}>
+        <Button
+          isModal
+          onClick={() => dispatch(uiActions.toggleExcludeModal())}
+        >
           Cancel
         </Button>
         <Button isModal onClick={confirmHandler}>

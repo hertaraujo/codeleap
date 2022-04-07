@@ -2,11 +2,23 @@ import Input from "./utils/Input";
 import Form from "./utils/Form";
 import Button from "./utils/Button";
 
+// Hooks
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-function EditingForm(props) {
+import { sendPost } from "../actions/post-actions";
+
+function PostForm(props) {
+  // TODO  Esses estados aqui serão recebidos por Slice e por isso já estarão com texto editável em corpo ao ser renderizado no caso de props.isEdit === true
+
+  const dispatch = useDispatch();
+
+  // TODO  Criar um hook para esse input validation
   const [titleValue, setTitleValue] = useState(``);
   const [contentValue, setContentValue] = useState(``);
+
+  const username = useSelector(state => state.auth.loggedUser);
 
   const [isTouched, setIsTouched] = useState(false);
 
@@ -16,6 +28,10 @@ function EditingForm(props) {
 
   const submitHandler = event => {
     event.preventDefault();
+
+    if (!valueIsValid) return;
+
+    dispatch(sendPost({ title: titleValue, content: contentValue, username }));
   };
 
   return (
@@ -67,4 +83,4 @@ function EditingForm(props) {
   );
 }
 
-export default EditingForm;
+export default PostForm;

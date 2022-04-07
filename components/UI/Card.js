@@ -1,10 +1,5 @@
 import styled from "styled-components";
 
-const center = `position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);`;
-
 const CardComp = styled.div`
   border: 1px solid #999;
   background-color: #fff;
@@ -14,7 +9,10 @@ const CardComp = styled.div`
     props.center &&
     `
     border-color:#ccc;
-    ${center}
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 40%;
     padding: 2.8rem 2.5rem 2.3rem 3.1rem;
     `};

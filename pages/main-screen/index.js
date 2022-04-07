@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Card from "../../components/UI/Card";
 import CompHeader from "../../components/CompHeader";
 import Posts from "../../components/Posts";
@@ -5,6 +6,13 @@ import Posts from "../../components/Posts";
 // Styles
 import styled from "styled-components";
 import PostForm from "../../components/PostForm";
+
+// hooks
+import { useDispatch } from "react-redux";
+
+import { postActions } from "../../redux/post-slice";
+import { useEffect } from "react";
+import { login } from "../../actions/auth-actions";
 
 const CompMain = styled.main`
   display: flex;
@@ -14,14 +22,32 @@ const CompMain = styled.main`
 `;
 
 function MainScreen(props) {
+  const dispatch = useDispatch();
+  dispatch(
+    postActions.updatePosts({
+      posts: props.posts,
+      postsFetchedAt: props.postsFetchedAt,
+    })
+  );
+
+  useEffect(() => dispatch(login()), [dispatch]);
+
   return (
     <>
+      <Head>
+        <title>Welcome to CodeLeap Network</title>
+        <meta
+          name="description"
+          content="A network to share what you're thinking"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <CompHeader text="CodeLeap Network" />
       <CompMain>
         <Card>
           <PostForm />
         </Card>
-        <Posts posts={props.posts} nowDate={props.nowDate} />
+        <Posts />
       </CompMain>
     </>
   );
@@ -29,31 +55,12 @@ function MainScreen(props) {
 
 export default MainScreen;
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const res = await fetch(`https://dev.codeleap.co.uk/careers/`);
-
-  // Create date here, for time accuracy
-  const nowDate = Date.now();
 
   const { results: posts } = await res.json();
 
-  // Sorting posts by date time
-  posts.sort(
-    (a, b) =>
-      new Date(b.created_datetime).getTime() -
-      new Date(a.created_datetime).getTime()
-  );
-
-  // Formatting objects of posts
-  const formattedPosts = posts.map(post => ({
-    id: post.id,
-    username: post.username,
-    createdAt: new Date(post.created_datetime).getTime(),
-    content: post.content,
-    title: post.title,
-  }));
-
   return {
-    props: { nowDate, posts: formattedPosts },
+    props: { posts },
   };
 }

@@ -11,6 +11,8 @@ import { useRouter } from "next/router";
 export default function Home() {
   const router = useRouter();
 
+  // TODO  criar um hook para esse input validation
+
   const [enteredValue, setEnteredValue] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 
@@ -30,7 +32,9 @@ export default function Home() {
     event.preventDefault();
 
     if (!valueIsValid) return;
+
     localStorage.setItem("username", enteredValue);
+
     router.push("/main-screen");
   };
 
@@ -40,7 +44,7 @@ export default function Home() {
         <title>CodeLeap</title>
         <meta
           name="description"
-          content="The CodeLeap network to share what you're thinking"
+          content="A network to share what you're thinking"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
