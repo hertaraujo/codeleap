@@ -12,7 +12,6 @@ function Posts() {
         ...post,
         createdAt: getDateString(postsFetchedAt, post.createdAt),
       }}
-      nowDate={postsFetchedAt}
     />
   ));
 }

@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
-import { uiActions } from "../redux/ui-slice";
+
+import { sendDeletePost } from "../actions/post-actions";
 
 import Button from "./utils/Button";
 import styled from "styled-components";
@@ -23,21 +24,20 @@ const CBComp = styled.div`
   }
 `;
 
-function ConfirmBox() {
+function ConfirmBox({ postId, onToggleModal }) {
   const dispatch = useDispatch();
 
   const confirmHandler = () => {
-    dispatch(uiActions.toggleExcludeModal());
+    dispatch(sendDeletePost(postId));
+    onToggleModal();
   };
 
   return (
     <CBComp>
+      {console.log(`postId: ${postId}`)}
       <p>Are you sure you want to delete this post?</p>
       <div>
-        <Button
-          isModal
-          onClick={() => dispatch(uiActions.toggleExcludeModal())}
-        >
+        <Button isModal onClick={onToggleModal}>
           Cancel
         </Button>
         <Button isModal onClick={confirmHandler}>

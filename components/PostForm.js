@@ -3,26 +3,31 @@ import Form from "./utils/Form";
 import Button from "./utils/Button";
 
 // Hooks
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { sendPost } from "../actions/post-actions";
+import { sendNewPost, sendEditedPost } from "../actions/post-actions";
 
-function PostForm({ isEdit }) {
+function PostForm({ isEdit, id, onToggleModal }) {
   const dispatch = useDispatch();
 
-  // TODO  Esses estados aqui serão recebidos por Slice e por isso já estarão com texto editável em corpo ao ser renderizado no caso de isEdit === true
-  const [titleValue, setTitleValue] = useState(``);
-  const [contentValue, setContentValue] = useState(``);
-
-  // TODO  Criar um hook para esse input validation
   const username = useSelector(state => state.auth.loggedUser);
 
+  const [title, setTitle] = useState(``);
+  const [content, setContent] = useState(``);
   const [isTouched, setIsTouched] = useState(false);
-
-  const valueIsValid = titleValue.trim() !== "" && contentValue.trim() !== "";
-
+  const valueIsValid = title.trim() !== "" && content.trim() !== "";
   const hasError = !valueIsValid && isTouched;
+
+  const post = useSelector(state =>
+    state.post.posts.find(post => post.id === id)
+  );
+
+  useEffect(() => {
+    if (!isEdit) return;
+    setTitle(post.title);
+    setContent(post.content);
+  }, [isEdit, post]);
 
   const submitHandler = event => {
     event.preventDefault();
@@ -30,16 +35,10 @@ function PostForm({ isEdit }) {
     if (!valueIsValid) return;
 
     if (isEdit) {
-      // TEMP
-      return;
-      // TODO  Action and Reducer
-      dispatch(
-        changePost({ title: titleValue, content: contentValue, username })
-      );
+      dispatch(sendEditedPost({ title, content, id }));
+      onToggleModal();
     } else {
-      dispatch(
-        sendPost({ title: titleValue, content: contentValue, username })
-      );
+      dispatch(sendNewPost({ title, content, username }));
     }
   };
 
@@ -52,28 +51,28 @@ function PostForm({ isEdit }) {
         label={`Title`}
         title={`This field can't be empty`}
         placeholder={`Hello world`}
-        id={`title`}
+        id={`title-${id}`}
         onBlur={() => setIsTouched(true)}
         onChange={e => {
-          setTitleValue(e.target.value);
+          setTitle(e.target.value);
           if (!isTouched) setIsTouched(true);
         }}
-        value={titleValue}
+        value={title}
         required
         helperMessage={`You have to give your post a title.`}
       />
       <Input
-        paddingBottom={`5rem`}
+        paddingBottom={`5.2rem`}
         label={`Content`}
         title={`This field can't be empty`}
         placeholder={`Content here`}
-        id={`content`}
+        id={`content-${id}`}
         onBlur={() => setIsTouched(true)}
         onChange={e => {
-          setContentValue(e.target.value);
+          setContent(e.target.value);
           if (!isTouched) setIsTouched(true);
         }}
-        value={contentValue}
+        value={content}
         required
         helperMessage={`You have to give your post a content.`}
       />

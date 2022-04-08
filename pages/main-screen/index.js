@@ -23,12 +23,17 @@ const CompMain = styled.main`
 `;
 
 function MainScreen(props) {
+  console.log(`main`);
+
   const dispatch = useDispatch();
-  dispatch(
-    postActions.updatePosts({
-      posts: props.posts,
-    })
-  );
+
+  useEffect(() => {
+    dispatch(
+      postActions.updatePosts({
+        posts: props.posts,
+      })
+    );
+  }, [dispatch, props.posts]);
 
   useEffect(() => dispatch(login()), [dispatch]);
 

@@ -43,7 +43,25 @@ const postSlice = createSlice({
       ];
     },
 
-    changePost(state, action) {},
+    editPost(state, action) {
+      const editedPost = {
+        id: action.payload.id,
+        username: action.payload.username,
+        createdAt: new Date(action.payload.created_datetime).getTime(),
+        content: action.payload.content,
+        title: action.payload.title,
+      };
+
+      state.posts = state.posts.map(post =>
+        post.id === editedPost.id ? editedPost : post
+      );
+    },
+
+    deletePost(state, action) {
+      const postId = action.payload;
+
+      state.posts = state.posts.filter(post => post.id !== postId);
+    },
   },
 });
 

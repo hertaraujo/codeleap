@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
-const InputComp = styled.input`
+const styles = ``;
+
+const InputComp = styled.textarea`
+  resize: none;
   align-items: stretch;
   border: 0.1rem solid #777;
   border-radius: 4px;
@@ -26,6 +29,8 @@ const InputComp = styled.input`
   `}
 `;
 
+const TextComp = styled(InputComp)``;
+
 const Label = styled.label`
   margin-bottom: -3rem;
   padding-bottom: 2rem;
@@ -49,7 +54,9 @@ const Input = props => {
         {` `}
         <HelperMsg title={props.helperMessage}>&#x0003F;</HelperMsg>
       </Label>
-      <InputComp {...props} />
+      <InputComp {...props} rows="1">
+        {props.value}
+      </InputComp>
     </>
   );
 };

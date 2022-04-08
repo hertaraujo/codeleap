@@ -11,16 +11,12 @@ import { useRouter } from "next/router";
 export default function Home() {
   const router = useRouter();
 
-  // TODO  criar um hook para esse input validation
-
   const [enteredValue, setEnteredValue] = useState("");
   const [isTouched, setIsTouched] = useState(false);
-
-  // ! Only letters, numbers, dots and underscores are accepted && startsWith a letter
+  // letters, numbers, dots and underscores && startsWith a letter
   const valueIsValid =
     /^[0-9A-Z_.-]+$/i.test(enteredValue) &&
     /^[0-9A-Z]+$/i.test(enteredValue[0]);
-
   const hasError = !valueIsValid && isTouched;
 
   const changeHandler = e => {
@@ -64,14 +60,14 @@ export default function Home() {
               onBlur={() => setIsTouched(true)}
               required
               isInvalid={hasError}
-              helperMessage={`Only letters, numbers, dots and underscores it must start with a letter.`}
+              helperMessage={`Only letters, numbers, dots and underscores it and MUST start with a letter.`}
             />
             <Button
               disabled={hasError}
               type="submit"
               title={
                 hasError
-                  ? `Please enter an username. Only letters, numbers, dots and underscores are accepted.`
+                  ? `It MUST start with a letter. Only letters, numbers, dots and underscores are accepted.`
                   : ""
               }
               onClick={() => setIsTouched(true)}

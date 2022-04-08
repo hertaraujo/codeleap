@@ -2,9 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 
 // Slices
 import postReducer from "./post-slice";
-import uiReducer from "./ui-slice";
 import authReducer from "./auth-slice";
 
 export const store = configureStore({
-  reducer: { post: postReducer, ui: uiReducer, auth: authReducer },
+  reducer: { post: postReducer, auth: authReducer },
 });
