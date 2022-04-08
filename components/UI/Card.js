@@ -5,6 +5,7 @@ const CardComp = styled.div`
   background-color: #fff;
   align-self: stretch;
   padding: 2.3rem 3.4rem 2.9rem 3rem;
+  position: relative;
   ${props =>
     props.center &&
     `

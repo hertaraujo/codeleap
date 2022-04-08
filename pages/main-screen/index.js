@@ -23,8 +23,6 @@ const CompMain = styled.main`
 `;
 
 function MainScreen(props) {
-  console.log(`main`);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,7 +43,7 @@ function MainScreen(props) {
           name="description"
           content="A network to share what you're thinking"
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="./favicon.png" type="image/png" />
       </Head>
       <CompHeader text="CodeLeap Network" />
       <CompMain>
