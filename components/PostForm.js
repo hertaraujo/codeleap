@@ -62,7 +62,7 @@ function PostForm({ isEdit, id, onToggleModal }) {
         helperMessage={`You have to give your post a title.`}
       />
       <Input
-        paddingBottom={`5.2rem`}
+        isTextArea
         label={`Content`}
         title={`This field can't be empty`}
         placeholder={`Content here`}
