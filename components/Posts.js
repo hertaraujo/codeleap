@@ -10,7 +10,7 @@ const NoPosts = styled.p`
 
 function Posts() {
   const posts = useSelector(state => state.post.posts);
-  const postsFetchedAt = Date.now();
+  const postsFetchedAt = Date.now() - 1000 * 30;
 
   if (posts.length === 0) return <NoPosts>Any post was made yet...</NoPosts>;
 
