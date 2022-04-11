@@ -1,9 +1,18 @@
 import { useSelector } from "react-redux";
+import styled from "styled-components";
 import Post from "./Post";
+
+const NoPosts = styled.p`
+  font-size: 2.2rem;
+  text-align: center;
+  font-weight: 600;
+`;
 
 function Posts() {
   const posts = useSelector(state => state.post.posts);
   const postsFetchedAt = Date.now();
+
+  if (posts.length === 0) return <NoPosts>Any post was made yet...</NoPosts>;
 
   return posts.map(post => (
     <Post

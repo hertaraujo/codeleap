@@ -29,18 +29,16 @@ function ConfirmBox({ postId, onToggleModal }) {
 
   const confirmHandler = () => {
     dispatch(sendDeletePost(postId));
-    onToggleModal();
   };
 
   return (
     <CBComp>
-      {console.log(`postId: ${postId}`)}
       <p>Are you sure you want to delete this post?</p>
       <div>
-        <Button isModal onClick={onToggleModal}>
+        <Button isWhite onClick={onToggleModal}>
           Cancel
         </Button>
-        <Button isModal onClick={confirmHandler}>
+        <Button isWhite onClick={confirmHandler}>
           OK
         </Button>
       </div>

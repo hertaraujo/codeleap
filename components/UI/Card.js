@@ -14,13 +14,19 @@ const CardComp = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 40%;
+    min-width: 50rem;
     padding: 2.8rem 2.5rem 2.3rem 3.1rem;
     `};
 
   ${props => props.fillCard && `padding: 0;`}
 
-  ${props => props.stretchCard && `width: 60vw`}
+  /* 1em = 16px | xem = 500px | 31,25 */
+  @media (max-width: 31.25rem) {
+    ${props => props.center && `border: none;  min-width: 95vw;`}
+    ${props => props.stretchCard && `width: 90vw`}
+  }
+
+  ${props => props.stretchCard && `min-width: 60vw`}
 `;
 
 function Card(props) {

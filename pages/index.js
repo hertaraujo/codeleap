@@ -13,16 +13,8 @@ export default function Home() {
 
   const [enteredValue, setEnteredValue] = useState("");
   const [isTouched, setIsTouched] = useState(false);
-  // letters, numbers, dots and underscores && startsWith a letter
-  const valueIsValid =
-    /^[0-9A-Z_.-]+$/i.test(enteredValue) &&
-    /^[0-9A-Z]+$/i.test(enteredValue[0]);
+  const valueIsValid = /^[0-9A-Z_.]+$/i.test(enteredValue);
   const hasError = !valueIsValid && isTouched;
-
-  const changeHandler = e => {
-    setEnteredValue(e.target.value + "");
-    if (!enteredValue) setIsTouched(true);
-  };
 
   const submitHandler = event => {
     event.preventDefault();
@@ -30,7 +22,6 @@ export default function Home() {
     if (!valueIsValid) return;
 
     localStorage.setItem("username", enteredValue);
-
     router.push("/main-screen");
   };
 
@@ -53,21 +44,25 @@ export default function Home() {
           >
             <Input
               label={`Please enter your username`}
-              title={`This field can't be empty`}
+              title={`This field can't be empty and max of 30 chars`}
               placeholder={`John doe`}
               id={`username`}
-              onChange={changeHandler}
+              onChange={e => {
+                setEnteredValue(e.target.value + "");
+                if (!enteredValue) setIsTouched(true);
+              }}
               onBlur={() => setIsTouched(true)}
+              value={enteredValue}
+              maxLength={30}
               required
               isInvalid={hasError}
-              helperMessage={`Only letters, numbers, dots and underscores it and MUST start with a letter.`}
             />
             <Button
               disabled={hasError}
               type="submit"
               title={
                 hasError
-                  ? `It MUST start with a letter. Only letters, numbers, dots and underscores are accepted.`
+                  ? `Only letters, numbers, dots and underscores are accepted.`
                   : ""
               }
               onClick={() => setIsTouched(true)}

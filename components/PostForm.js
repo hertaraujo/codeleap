@@ -16,7 +16,7 @@ import { sendNewPost, sendEditedPost } from "../actions/post-actions";
 // Icon
 import closeIcon from "../assets/close.svg";
 
-const Close = styled.span`
+const Close = styled.button`
   position: absolute;
   top: 2%;
   right: 1%;
@@ -54,8 +54,7 @@ function PostForm({ isEdit, id, onToggleModal }) {
     if (!valueIsValid) return;
 
     if (isEdit) {
-      dispatch(sendEditedPost({ title, content, id }));
-      onToggleModal();
+      dispatch(sendEditedPost({ title, content, id }, onToggleModal));
     } else {
       dispatch(sendNewPost({ title, content, username }));
     }
@@ -84,10 +83,10 @@ function PostForm({ isEdit, id, onToggleModal }) {
           }}
           value={title}
           required
-          helperMessage={`You have to give your post a title.`}
         />
         <Input
-          isTextArea
+          as="textarea"
+          rows={1}
           label={`Content`}
           title={`This field can't be empty`}
           placeholder={`Content here`}
@@ -99,14 +98,13 @@ function PostForm({ isEdit, id, onToggleModal }) {
           }}
           value={content}
           required
-          helperMessage={`You have to give your post a content.`}
         />
         <Button
           disabled={hasError}
           type="submit"
           title={
             hasError
-              ? "Please give your post a title and some content so that you can edit it."
+              ? "Please give your post a title and some content so that you can submit it."
               : ""
           }
         >

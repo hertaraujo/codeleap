@@ -22,7 +22,7 @@ import styled from "styled-components";
 
 const PostMain = styled.main`
   display: grid;
-  grid-template-rows: fit-content 1fr;
+  grid-template-rows: 1fr;
   padding: 3rem;
   row-gap: 1.8rem;
   line-height: 2.1rem;
@@ -46,12 +46,14 @@ const PostMain = styled.main`
     display: flex;
     flex-direction: column;
     gap: 2rem;
+
+    p {
+      word-break: break-all;
+    }
   }
 `;
 
 function Post({ post }) {
-  // console.log(`reder post`);
-
   const [isExcludeOpen, setIsExcludeOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
@@ -75,6 +77,7 @@ function Post({ post }) {
               overlayClassName="overlay"
               onRequestClose={toggleExcludeHandler}
               isOpen={isExcludeOpen}
+              appElement={document.querySelector("#main")}
             >
               <ConfirmBox
                 postId={post.id}
@@ -82,19 +85,22 @@ function Post({ post }) {
               />
             </Modal>
 
-            <Button isIcon onClick={toggleExcludeHandler}>
-              <Image
-                src={binIcon}
-                alt="Bin icon for the button that excludes its post"
-                title="Delete this post"
-              />
-            </Button>
+            <span style={{ marginLeft: "auto", transform: "translateY(4px)" }}>
+              <Button isIcon onClick={toggleExcludeHandler}>
+                <Image
+                  src={binIcon}
+                  alt="Bin icon for the button that excludes its post"
+                  title="Delete this post"
+                />
+              </Button>
+            </span>
 
             <Modal
               className="modal"
               overlayClassName="overlay"
               onRequestClose={toggleEditHandler}
               isOpen={isEditOpen}
+              appElement={document.querySelector("#main")}
             >
               <Card stretchCard>
                 <PostForm
@@ -104,7 +110,7 @@ function Post({ post }) {
                 />
               </Card>
             </Modal>
-            <span style={{ transform: `translateY(3.5px)` }}>
+            <span style={{ transform: `translateY(2.2px)` }}>
               <Button isIcon onClick={toggleEditHandler} title="Edi this post">
                 <Image
                   src={editIcon}

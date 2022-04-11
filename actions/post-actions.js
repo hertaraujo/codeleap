@@ -22,11 +22,11 @@ export const sendNewPost = post => {
   };
 };
 
-export const sendEditedPost = post => {
+export const sendEditedPost = (post, toggleModal) => {
   return async dispatch => {
     const sendData = async () => {
       const res = await fetch(
-        `https://dev.codeleap.co.uk/careers/${post.id}/`,
+        `https://dev.codeleap.co.uk/careers/${post.id} TEMP /`,
         {
           method: "PATCH",
           headers: {
@@ -36,6 +36,10 @@ export const sendEditedPost = post => {
         }
       );
 
+      if (res.status === 404) {
+        throw new Error("Post not found");
+      }
+
       return await res.json();
     };
 
@@ -43,16 +47,24 @@ export const sendEditedPost = post => {
       const post = await sendData();
 
       dispatch(postActions.editPost(post));
-    } catch (err) {}
+      toggleModal();
+    } catch (err) {
+      throw err;
+    }
   };
 };
 
 export const sendDeletePost = postId => {
   return async dispatch => {
     const sendData = async () => {
-      await fetch(`https://dev.codeleap.co.uk/careers/${postId}/`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `https://dev.codeleap.co.uk/careers/${postId} TEMP /`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      console.log(res);
     };
 
     try {

@@ -20,6 +20,12 @@ const CompMain = styled.main`
   flex-direction: column;
   gap: 4rem;
   padding: 6rem 4rem;
+
+  /* 1em = 16px | xem = 1400px | 87.5em */
+  @media (min-width: 87.5em) {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
 `;
 
 function MainScreen(props) {
@@ -50,6 +56,7 @@ function MainScreen(props) {
         <Card>
           <PostForm />
         </Card>
+
         <Posts />
       </CompMain>
     </>
@@ -59,11 +66,15 @@ function MainScreen(props) {
 export default MainScreen;
 
 export async function getStaticProps(context) {
-  const res = await fetch(`https://dev.codeleap.co.uk/careers/`);
+  try {
+    const res = await fetch(`https://dev.codeleap.co.uk/careers/`);
 
-  const { results: posts } = await res.json();
+    const errorCode = +res.status === 404 ? 404 : false;
 
-  return {
-    props: { posts },
-  };
+    const { results: posts } = await res.json();
+
+    return { props: { posts, errorCode } };
+  } catch (err) {
+    console.log(err);
+  }
 }
