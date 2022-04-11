@@ -26,7 +26,7 @@ export const sendEditedPost = (post, toggleModal) => {
   return async dispatch => {
     const sendData = async () => {
       const res = await fetch(
-        `https://dev.codeleap.co.uk/careers/${post.id} TEMP /`,
+        `https://dev.codeleap.co.uk/careers/${post.id}/`,
         {
           method: "PATCH",
           headers: {
@@ -57,12 +57,9 @@ export const sendEditedPost = (post, toggleModal) => {
 export const sendDeletePost = postId => {
   return async dispatch => {
     const sendData = async () => {
-      const res = await fetch(
-        `https://dev.codeleap.co.uk/careers/${postId} TEMP /`,
-        {
-          method: "DELETE",
-        }
-      );
+      const res = await fetch(`https://dev.codeleap.co.uk/careers/${postId}/`, {
+        method: "DELETE",
+      });
 
       console.log(res);
     };

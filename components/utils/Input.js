@@ -46,12 +46,12 @@ const Input = props => {
 
   return (
     <>
-      <Label htmlFor={props.id}>
+      <Label htmlFor={props.id} onClick={() => setIsShowing(prev => !prev)}>
         {props.label}
         {` `}
         {isShowing && <HelperMsg>({props.title})</HelperMsg>}
       </Label>
-      <InputComp {...props} onClick={() => setIsShowing(prev => !prev)} />
+      <InputComp {...props} />
     </>
   );
 };

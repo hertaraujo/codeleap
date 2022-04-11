@@ -45,7 +45,7 @@ export default function Home() {
             <Input
               label={`Please enter your username`}
               title={`This field can't be empty and max of 30 chars`}
-              placeholder={`John doe`}
+              placeholder={`John Doe`}
               id={`username`}
               onChange={e => {
                 setEnteredValue(e.target.value + "");
