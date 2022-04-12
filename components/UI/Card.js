@@ -21,8 +21,7 @@ const CardComp = styled.div`
   ${props => props.fillCard && `padding: 0;`}
 
   /* 1em = 16px | xem = 500px | 31,25 */
-  
-  @media (max-width: 31.25rem), (-webkit-max-width: 31.25rem) {
+  @media (max-width: 31.25rem) {
     ${props => props.center && `border: none;  min-width: 95vw;`}
     ${props => props.stretchCard && `width: 90vw`}
   }

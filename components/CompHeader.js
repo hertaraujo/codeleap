@@ -26,6 +26,15 @@ const Header = styled.header`
     hyphens: auto;
     align-self: flex-end;
   }
+
+  /* 1em = 16px | xem = 500px | 31,25 */
+  @media (max-width: 31.25rem), (-webkit-max-width: 31.25rem) {
+    padding: ${props => (props.isPost ? `1.4rem 2.5rem` : `2rem`)};
+
+    h1 {
+      font-size: 2rem;
+    }
+  }
 `;
 
 const CompHeader = props => {

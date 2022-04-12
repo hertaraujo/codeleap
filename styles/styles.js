@@ -13,12 +13,12 @@ html {
   font-size: 62.5%;
   box-sizing: border-box;
   /* 1em = 16px | 1320px - xem */
-  @media (min-width: 82.5em), (-webkit-min-width: 82.5em) {
+  @media (min-width: 82.5em) {
     /* 16px = 1rem | 10px - 62.5% | 14px - 87.5% */
     font-size: 87.5%;
   }
 /* 1em = 16px | 500px - xem | 31,25 */  
-  @media (max-width: 31.25em), (-webkit-max-width: 31.25em) {
+  @media (max-width: 31.25em) {
     /* 16px = 1rem | 10px - 62.5% | 9px - 56.25% */
     font-size: 56.25%;
   }
@@ -34,7 +34,6 @@ body {
 body, input, textarea, button {
   font-family: Roboto, Helvetica, sans-serif;
   font-weight: 400;
-  
 }
 
 a {

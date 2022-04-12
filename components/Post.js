@@ -28,6 +28,11 @@ const PostMain = styled.main`
   line-height: 2.1rem;
   font-size: 1.8rem;
 
+  /* 1em = 16px | xem = 500px | 31,25 */
+  @media (max-width: 31.25rem), (-webkit-max-width: 31.25rem) {
+    font-size: 1.6rem;
+  }
+
   .post-info {
     display: flex;
     justify-content: space-between;

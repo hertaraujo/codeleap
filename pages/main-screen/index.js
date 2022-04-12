@@ -26,6 +26,12 @@ const CompMain = styled.main`
     max-width: 1400px;
     margin: 0 auto;
   }
+
+  /* 1em = 16px | xem = 500px | 31,25 */
+  @media (max-width: 31.25rem) {
+    padding: 3rem 2rem;
+    gap: 2rem;
+  }
 `;
 
 function MainScreen(props) {
