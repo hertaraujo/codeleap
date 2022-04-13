@@ -29,7 +29,7 @@ const PostMain = styled.main`
   font-size: 1.8rem;
 
   /* 1em = 16px | xem = 500px | 31,25 */
-  @media (max-width: 31.25rem), (-webkit-max-width: 31.25rem) {
+  @media (max-width: 31.25rem) {
     font-size: 1.6rem;
   }
 

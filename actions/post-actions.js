@@ -36,10 +36,6 @@ export const sendEditedPost = (post, toggleModal) => {
         }
       );
 
-      if (res.status === 404) {
-        throw new Error("Post not found");
-      }
-
       return await res.json();
     };
 
@@ -48,20 +44,16 @@ export const sendEditedPost = (post, toggleModal) => {
 
       dispatch(postActions.editPost(post));
       toggleModal();
-    } catch (err) {
-      throw err;
-    }
+    } catch (err) {}
   };
 };
 
 export const sendDeletePost = postId => {
   return async dispatch => {
     const sendData = async () => {
-      const res = await fetch(`https://dev.codeleap.co.uk/careers/${postId}/`, {
+      await fetch(`https://dev.codeleap.co.uk/careers/${postId}/`, {
         method: "DELETE",
       });
-
-      console.log(res);
     };
 
     try {

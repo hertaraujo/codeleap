@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { ErrorBoundary } from "./error/ErrorBoundary";
 
 const Header = styled.header`
   align-self: stretch;
@@ -28,7 +27,7 @@ const Header = styled.header`
   }
 
   /* 1em = 16px | xem = 500px | 31,25 */
-  @media (max-width: 31.25rem), (-webkit-max-width: 31.25rem) {
+  @media (max-width: 31.25rem) {
     padding: ${props => (props.isPost ? `1.4rem 2.5rem` : `2rem`)};
 
     h1 {
@@ -41,7 +40,6 @@ const CompHeader = props => {
   return (
     <Header {...props}>
       <h1>{props.text}</h1>
-      {/* <ErrorBoundary>{props.children}</ErrorBoundary> */}
       {props.children}
     </Header>
   );

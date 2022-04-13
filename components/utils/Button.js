@@ -21,7 +21,8 @@ const Btn = styled.button`
     props.isIcon &&
     `
   padding: 0;
-  align-self: flex-start;`}
+  align-self: flex-start;
+  `}
   display: inline-block;
   position: relative;
   transition: all 0.27s;

@@ -75,11 +75,9 @@ export async function getStaticProps(context) {
   try {
     const res = await fetch(`https://dev.codeleap.co.uk/careers/`);
 
-    const errorCode = +res.status === 404 ? 404 : false;
-
     const { results: posts } = await res.json();
 
-    return { props: { posts, errorCode } };
+    return { props: { posts } };
   } catch (err) {
     console.log(err);
   }
