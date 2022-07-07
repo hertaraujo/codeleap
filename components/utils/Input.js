@@ -46,12 +46,12 @@ const Input = props => {
 
   return (
     <>
-      <Label htmlFor={props.id} onClick={() => setIsShowing(prev => !prev)}>
+      <Label htmlFor={props.id}>
         {props.label}
         {` `}
         {isShowing && <HelperMsg>({props.title})</HelperMsg>}
       </Label>
-      <InputComp {...props} />
+      <InputComp {...props} onFocus={() => setIsShowing(true)} onBlur={() => setIsShowing(false)}/>
     </>
   );
 };
