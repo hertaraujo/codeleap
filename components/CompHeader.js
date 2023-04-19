@@ -1,13 +1,19 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Header = styled.header`
   align-self: stretch;
-
   color: #fff;
-  background-color: #000;
+  background-color: #7695EC;
   font-weight: 700;
+  
   padding: ${props => (props.isPost ? `1.8rem 3rem` : `2.7rem`)};
-  ${props => props.isPost && "margin: -1px;"}
+  ${props => props.isPost &&
+    css`
+      margin: -1px;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    `
+  }
 
   display: flex;
 

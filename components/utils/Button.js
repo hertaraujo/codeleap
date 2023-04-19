@@ -1,16 +1,28 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+const moods = {
+  save: css`
+    color: #fff;
+    background-color: #47B960;
+  `,
+  cancel: css`
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #999999;
+  `,
+  delete: css`
+    color: #fff;
+    background-color: #FF5151;
+  `,
+}
 
 const Btn = styled.button`
   border: none;
   color: #fff;
   ${props => !props.isIcon && `min-width: 11rem;`}
-  background-color: #000;
-  ${props =>
-    props.isWhite &&
-    `
-    color: #000;
-    background-color: #fff;
-    border: 1px solid #000000;`}
+  background-color: #7695EC;
+  ${({mood}) => moods[mood]}
+  border-radius: 8px;
   font-family: inherit;
   padding: 0.8rem 3.2rem;
   font-size: 1.6rem;
@@ -19,10 +31,10 @@ const Btn = styled.button`
   align-self: flex-end;
   ${props =>
     props.isIcon &&
-    `
-  padding: 0;
-  align-self: flex-start;
-  `}
+    css`
+      padding: 0;
+      align-self: flex-start;
+    `}
   display: inline-block;
   position: relative;
   transition: all 0.27s;
@@ -36,8 +48,8 @@ const Btn = styled.button`
   }
 
   :disabled {
-    background-color: #999;
-    color: #e31919;
+    background-color: #ccc;
+    color: #6a86d4;
     cursor: not-allowed;
   }
 `;

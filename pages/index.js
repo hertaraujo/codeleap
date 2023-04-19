@@ -5,7 +5,7 @@ import Input from "../components/utils/Input";
 import Button from "../components/utils/Button";
 
 // Hooks
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 export default function Home() {
@@ -24,6 +24,14 @@ export default function Home() {
     localStorage.setItem("username", enteredValue);
     router.push("/main-screen");
   };
+  
+  useEffect(() => {
+    const username = localStorage.getItem("username")
+    
+    if (username) {
+      router.push("/main-screen")  
+    }
+  }, [router])
 
   return (
     <>

@@ -1,11 +1,11 @@
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const InputComp = styled.input`
   resize: none;
   align-items: stretch;
   border: 0.1rem solid #777;
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 0.6rem 0.8rem
     ${props => (props.placeholder === "Content here" ? "5.2rem" : "")};
 
@@ -19,13 +19,13 @@ const InputComp = styled.input`
 
   ${props =>
     props.isInvalid &&
-    `
-  border-color: #e31919;
-  color: #e31919;
+    css`
+      border-color: #e31919;
+      color: #e31919;
   
-  ::placeholder {
-    color: #e3191978;
-  }
+      ::placeholder {
+        color: #e3191978;
+      }
   `}
 `;
 

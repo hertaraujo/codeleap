@@ -1,7 +1,13 @@
 import { authActions } from "../redux/auth-slice";
 
-export const login = () => {
+export const login = (router) => {
   return async dispatch => {
-    dispatch(authActions.setLoggedUser(localStorage.getItem("username")));
+    const username = localStorage.getItem("username");
+    
+    if (username) {
+      dispatch(authActions.setLoggedUser(username));
+    } else {
+      router.push("/")
+    }
   };
 };

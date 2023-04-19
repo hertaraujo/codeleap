@@ -49,13 +49,13 @@ button {
 }
 
 ::selection {
-  background-color: #999;
+  background-color: #c8d5f7;
   color: #fff;
 }
 
 *:focus {
   outline: none;
-  box-shadow: 0 0 0 0.3rem #999;
+  box-shadow: 0 0 0 0.2rem #c8d5f7;
 }
 
 

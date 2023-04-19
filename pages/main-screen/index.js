@@ -14,12 +14,13 @@ import { useDispatch } from "react-redux";
 // Actions
 import { postActions } from "../../redux/post-slice";
 import { login } from "../../actions/auth-actions";
+import { useRouter } from 'next/router';
 
 const CompMain = styled.main`
   display: flex;
   flex-direction: column;
-  gap: 4rem;
-  padding: 6rem 4rem;
+  gap: 2.4rem;
+  padding: 2.4rem;
 
   /* 1em = 16px | xem = 1400px | 87.5em */
   @media (min-width: 87.5em) {
@@ -36,6 +37,7 @@ const CompMain = styled.main`
 
 function MainScreen(props) {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     dispatch(
@@ -45,7 +47,7 @@ function MainScreen(props) {
     );
   }, [dispatch, props.posts]);
 
-  useEffect(() => dispatch(login()), [dispatch]);
+  useEffect(() => dispatch(login(router)), [dispatch]);
 
   return (
     <>

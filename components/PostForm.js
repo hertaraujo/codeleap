@@ -18,8 +18,8 @@ import closeIcon from "../assets/close.svg";
 
 const Close = styled.button`
   position: absolute;
-  top: 2%;
-  right: 1%;
+  top: 3%;
+  right: 2%;
   transition: filter 0.25s;
 
   :hover {
@@ -99,17 +99,26 @@ function PostForm({ isEdit, id, onToggleModal }) {
           value={content}
           required
         />
-        <Button
-          disabled={hasError}
-          type="submit"
-          title={
-            hasError
+        <div>
+          {isEdit &&
+            <Button
+              type="reset"
+              mood="cancel"
+              onClick={onToggleModal}
+            >Cancel</Button>}
+          <Button
+            disabled={hasError}
+            mood={isEdit ? "save" : ""}
+            type="submit"
+            title={
+              hasError
               ? "Please give your post a title and some content so that you can submit it."
               : ""
-          }
-        >
-          {isEdit ? "SAVE" : "CREATE"}
-        </Button>
+            }
+            >
+            {isEdit ? "Save" : "Create"}
+          </Button>
+        </div>
       </Form>
     </>
   );

@@ -10,6 +10,13 @@ const FormComp = styled.form`
     font-weight: 700;
     margin-bottom: 2rem;
   }
+  
+  div {
+    align-self: flex-end;
+    display: flex;
+    gap: 1.6rem;
+    justify-self: flex-end;
+  }
 `;
 
 function Form(props) {
