@@ -1,16 +1,22 @@
 import Head from "next/head";
 import Form from "../components/utils/Form";
 import Card from "../components/UI/Card";
+import Loader from "../components/UI/Loader";
 import Input from "../components/utils/Input";
 import Button from "../components/utils/Button";
 
 // Hooks
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 
+import { login } from "../actions/auth-actions";
+
 export default function Home() {
+  const dispatch = useDispatch();
   const router = useRouter();
 
+  const [isLoggedOut, setIsLoggedOut] = useState(true);
   const [enteredValue, setEnteredValue] = useState("");
   const [isTouched, setIsTouched] = useState(false);
   const valueIsValid = /^[0-9A-Z_.]+$/i.test(enteredValue);
@@ -22,16 +28,18 @@ export default function Home() {
     if (!valueIsValid) return;
 
     localStorage.setItem("username", enteredValue);
+    dispatch(login());
     router.push("/main-screen");
   };
   
   useEffect(() => {
-    const username = localStorage.getItem("username")
-    
+    const username = localStorage.getItem("username");
     if (username) {
       router.push("/main-screen")  
+    } else {
+      setIsLoggedOut(true);
     }
-  }, [router])
+  }, [router]);
 
   return (
     <>
@@ -45,6 +53,7 @@ export default function Home() {
       </Head>
 
       <main>
+        {isLoggedOut ? <Loader /> :
         <Card center>
           <Form
             heading={`Welcome to CodeLeap network!`}
@@ -79,6 +88,7 @@ export default function Home() {
             </Button>
           </Form>
         </Card>
+        }
       </main>
     </>
   );

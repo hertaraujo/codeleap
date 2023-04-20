@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Card from "../../components/UI/Card";
+import Loader from "../../components/UI/Loader";
 import CompHeader from "../../components/CompHeader";
 import Posts from "../../components/Posts";
 import PostForm from "../../components/PostForm";
@@ -8,13 +9,12 @@ import PostForm from "../../components/PostForm";
 import styled from "styled-components";
 
 // hooks
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 // Actions
 import { postActions } from "../../redux/post-slice";
-import { login } from "../../actions/auth-actions";
-import { useRouter } from 'next/router';
 
 const CompMain = styled.main`
   display: flex;
@@ -38,6 +38,7 @@ const CompMain = styled.main`
 function MainScreen(props) {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     dispatch(
@@ -46,8 +47,15 @@ function MainScreen(props) {
       })
     );
   }, [dispatch, props.posts]);
-
-  useEffect(() => dispatch(login(router)), [dispatch]);
+  
+  useEffect(() => {
+    const username = localStorage.getItem("username");
+    if (!username) {
+      router.push("/");  
+    } else {
+      setIsLoggedIn(true);
+    }
+  }, [router]);
 
   return (
     <>
@@ -59,14 +67,17 @@ function MainScreen(props) {
         />
         <link rel="icon" href="./favicon.png" type="image/png" />
       </Head>
-      <CompHeader text="CodeLeap Network" />
-      <CompMain>
-        <Card>
-          <PostForm />
-        </Card>
-
-        <Posts />
-      </CompMain>
+      {!isLoggedIn ? <Loader /> :
+        <>
+          <CompHeader text="CodeLeap Network" />
+          <CompMain>
+            <Card>
+              <PostForm />
+            </Card>
+            <Posts />
+          </CompMain>
+        </>
+      }
     </>
   );
 }
