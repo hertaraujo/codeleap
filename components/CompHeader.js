@@ -40,6 +40,10 @@ const Header = styled.header`
       font-size: 2rem;
     }
   }
+  
+   span {
+    width: 24px;
+  }
 `;
 
 const CompHeader = props => {

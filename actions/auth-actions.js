@@ -6,3 +6,10 @@ export const login = () => {
     dispatch(authActions.setLoggedUser(username));
   };
 };
+
+export const logout = () => {
+  return async dispatch => {
+    localStorage.setItem("username", "");
+    dispatch(authActions.resetLoggedUser());
+  };
+};

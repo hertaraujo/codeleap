@@ -4,6 +4,7 @@ import Loader from "../../components/UI/Loader";
 import CompHeader from "../../components/CompHeader";
 import Posts from "../../components/Posts";
 import PostForm from "../../components/PostForm";
+import logoutIcon from "../../assets/logout.svg";
 
 // Styles
 import styled from "styled-components";
@@ -15,6 +16,9 @@ import { useRouter } from "next/router";
 
 // Actions
 import { postActions } from "../../redux/post-slice";
+import Button from '../../components/utils/Button';
+import Image from 'next/image';
+import { logout } from '../../actions/auth-actions';
 
 const CompMain = styled.main`
   display: flex;
@@ -69,7 +73,20 @@ function MainScreen(props) {
       </Head>
       {!isLoggedIn ? <Loader /> :
         <>
-          <CompHeader text="CodeLeap Network" />
+          <CompHeader text="CodeLeap Network">
+            <Button isIcon onClick={() => {
+                dispatch(logout());
+                router.push("/")
+              }}
+            >
+              Logout &nbsp;
+              <Image
+                src={logoutIcon}
+                alt="X icon for the button that logout"
+                title="Logout"
+              />
+            </Button>
+          </CompHeader>
           <CompMain>
             <Card>
               <PostForm />

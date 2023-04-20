@@ -9,6 +9,9 @@ const authSlice = createSlice({
     setLoggedUser(state, action) {
       state.loggedUser = action.payload;
     },
+    resetLoggedUser(state, action) {
+      state.loggedUser = "";
+    },
   },
 });
 

@@ -37,7 +37,7 @@ export default function Home() {
     if (username) {
       router.push("/main-screen")  
     } else {
-      setIsLoggedOut(true);
+      setIsLoggedOut(false);
     }
   }, [router]);
 
